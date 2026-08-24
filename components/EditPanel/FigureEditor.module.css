@@ -1,0 +1,68 @@
+.dropZone {
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius-md);
+  padding: 24px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.dropZone:hover {
+  border-color: var(--brand-green);
+  background: rgba(8,189,126,.04);
+}
+.dragging {
+  border-color: var(--brand-green) !important;
+  background: rgba(8,189,126,.08) !important;
+}
+
+.dropIcon {
+  color: var(--text-light);
+  transition: color 0.15s;
+}
+.dropZone:hover .dropIcon, .dragging .dropIcon { color: var(--brand-green); }
+
+.dropTitle {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.dropHint {
+  font-size: 0.72rem;
+  color: var(--text-light);
+}
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.previewImg {
+  width: 100%;
+  max-height: 140px;
+  object-fit: contain;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-panel);
+  padding: 4px;
+}
+
+.removeBtn {
+  background: none;
+  border: 1px solid #FCA5A5;
+  color: #EF4444;
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+.removeBtn:hover { background: rgba(239,68,68,.06); }

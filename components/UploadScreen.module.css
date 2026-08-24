@@ -1,0 +1,224 @@
+.root {
+  min-height: 100vh;
+  background: var(--bg-editor);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+}
+
+.bgPattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(47,128,249,.12) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(8,189,126,.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.container {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.logoMark {
+  font-size: 24px;
+  color: var(--brand-blue);
+  filter: drop-shadow(0 0 8px rgba(47,128,249,.6));
+}
+
+.logoText {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+}
+
+.tagline {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,.45);
+  letter-spacing: 0.01em;
+}
+
+.card {
+  width: 100%;
+  background: rgba(255,255,255,.04);
+  border: 1.5px dashed rgba(255,255,255,.15);
+  border-radius: var(--radius-lg);
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  backdrop-filter: blur(12px);
+}
+
+.card:hover {
+  border-color: var(--brand-blue);
+  background: rgba(47,128,249,.06);
+}
+
+.dragging {
+  border-color: var(--brand-blue) !important;
+  background: rgba(47,128,249,.1) !important;
+  transform: scale(1.01);
+}
+
+.loading {
+  cursor: default;
+  pointer-events: none;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.uploadIcon {
+  color: rgba(255,255,255,.3);
+  margin-bottom: 4px;
+  transition: color 0.2s;
+}
+
+.card:hover .uploadIcon,
+.dragging .uploadIcon {
+  color: var(--brand-blue);
+}
+
+.cardTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+.cardSubtitle {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,.45);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.code {
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.82em;
+  background: rgba(255,255,255,.08);
+  padding: 1px 5px;
+  border-radius: 4px;
+  color: rgba(255,255,255,.7);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 80%;
+  color: rgba(255,255,255,.25);
+  font-size: 0.8rem;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,.1);
+}
+
+.browseBtn {
+  background: var(--brand-blue);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px 28px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  font-family: inherit;
+}
+.browseBtn:hover { background: var(--brand-blue-dk); }
+.browseBtn:active { transform: scale(0.97); }
+
+.hint {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,.3);
+  text-align: center;
+  margin-top: 4px;
+}
+
+.loadingState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 0;
+}
+
+.spinner {
+  width: 40px; height: 40px;
+  border: 3px solid rgba(47,128,249,.2);
+  border-top-color: var(--brand-blue);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loadingText {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,.6);
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(239,68,68,.12);
+  border: 1px solid rgba(239,68,68,.3);
+  color: #FC8181;
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 0.875rem;
+  width: 100%;
+}
+
+.features {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 99px;
+  padding: 5px 14px;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,.5);
+  backdrop-filter: blur(8px);
+}
