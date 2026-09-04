@@ -99,7 +99,7 @@ export default function PageCanvas({ content, zoom, onBlockSelect, onBlockUpdate
           transformOrigin: 'top left',
         }}
         title="Page preview"
-        sandbox="allow-scripts allow-same-origin"
+        sandbox="allow-scripts allow-same-origin allow-downloads"
       />
     </div>
   )
