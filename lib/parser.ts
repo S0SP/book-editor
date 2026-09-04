@@ -6,6 +6,7 @@ const EDITABLE_SELECTORS = [
   '.chapter-banner',
   '.section-bar',
   '.fig',
+  '.diagram-card',
   '.running-head',
   '.side-card',
 ]

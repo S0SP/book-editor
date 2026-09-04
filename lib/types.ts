@@ -38,6 +38,8 @@ export interface FigureData {
   caption: string
   imageSrc?: string
   isGraph?: boolean
+  originalType?: 'fig' | 'diagram-card'
+  extraHTML?: string
 }
 
 export interface TopicData {

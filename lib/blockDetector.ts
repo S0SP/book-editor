@@ -5,7 +5,7 @@ export function detectBlockType(el: Element): BlockType {
   if (el.classList.contains('topic-banner')) return 'topic-banner'
   if (el.classList.contains('chapter-banner')) return 'chapter-banner'
   if (el.classList.contains('section-bar')) return 'section-bar'
-  if (el.classList.contains('fig')) return 'figure'
+  if (el.classList.contains('fig') || el.classList.contains('diagram-card')) return 'figure'
   if (el.classList.contains('running-head')) return 'running-head'
   if (el.classList.contains('side-card')) return 'side-card'
   return 'generic'
@@ -84,6 +84,34 @@ ${opts}
 export function parseFigure(outerHTML: string): FigureData | null {
   const doc = parse(outerHTML)
   const fig = doc.querySelector('.fig')
+  const diagramCard = doc.querySelector('.diagram-card')
+
+  if (diagramCard) {
+    const header = diagramCard.querySelector('.diagram-header')
+    const summary = diagramCard.querySelector('.diagram-summary')
+    const caption = diagramCard.querySelector('figcaption')
+    
+    const body = diagramCard.querySelector('.diagram-body')
+    let extraHTML = ''
+    if (body) {
+      Array.from(body.children).forEach(child => {
+        if (!child.classList.contains('diagram-summary')) {
+          extraHTML += child.outerHTML + '\n    '
+        }
+      })
+    }
+
+    return {
+      isPlaceholder: true,
+      isGraph: false,
+      label: header?.textContent?.trim() || '',
+      description: summary?.textContent?.trim() || '',
+      caption: caption?.textContent?.trim() || '',
+      originalType: 'diagram-card',
+      extraHTML: extraHTML.trim()
+    }
+  }
+
   if (!fig) return null
   return {
     isPlaceholder: !!fig.querySelector('.fig-placeholder'),
@@ -92,6 +120,7 @@ export function parseFigure(outerHTML: string): FigureData | null {
     description: fig.querySelector('.ph-desc')?.textContent?.trim() || '',
     caption: fig.querySelector('figcaption')?.textContent?.trim() || '',
     imageSrc: fig.querySelector('img')?.getAttribute('src') || undefined,
+    originalType: 'fig'
   }
 }
 
@@ -107,6 +136,17 @@ export function serializeFigureWithImage(
 }
 
 export function serializeFigurePlaceholder(data: FigureData, blockId: string): string {
+  if (data.originalType === 'diagram-card') {
+    return `<div class="diagram-card" data-block-id="${blockId}">
+  <div class="diagram-header">${data.label}</div>
+  <div class="diagram-body">
+    <p class="diagram-summary">${data.description}</p>
+    ${data.extraHTML || ''}
+  </div>
+  <figcaption>${data.caption}</figcaption>
+</div>`
+  }
+
   const graphClass = data.isGraph ? ' graph' : ''
   return `<figure class="fig${graphClass}" data-block-id="${blockId}">
   <div class="fig-placeholder${graphClass}">
