@@ -234,7 +234,7 @@ body {
   position: relative;
 }
 
-.q, .topic-banner, .chapter-banner, .section-bar, .fig,
+.q, .topic-banner, .chapter-banner, .section-bar, .fig, .diagram-card,
 .running-head, .side-card {
   cursor: pointer;
   border-radius: 4px;
@@ -247,7 +247,7 @@ body {
 .topic-banner:hover    { outline-color: rgba(47,128,249,.3); }
 .chapter-banner:hover  { outline-color: rgba(47,128,249,.3); }
 .section-bar:hover     { outline-color: rgba(47,128,249,.25); }
-.fig:hover             { outline-color: rgba(47,128,249,.35); box-shadow: 0 0 0 4px rgba(47,128,249,.08); }
+.fig:hover, .diagram-card:hover { outline-color: rgba(47,128,249,.35); box-shadow: 0 0 0 4px rgba(47,128,249,.08); }
 .running-head:hover    { outline-color: rgba(47,128,249,.2); }
 .side-card:hover       { outline-color: rgba(47,128,249,.2); }
 
@@ -266,14 +266,14 @@ body {
 // Script injected into iframe — handles click detection and postMessage
 export const IFRAME_SCRIPT = `
 (function () {
-  var SELECTORS = '.q, .topic-banner, .chapter-banner, .section-bar, .fig, .running-head, .side-card';
+  var SELECTORS = '.q, .topic-banner, .chapter-banner, .section-bar, .fig, .diagram-card, .running-head, .side-card';
 
   function getType(el) {
     if (el.classList.contains('q'))              return 'question';
     if (el.classList.contains('topic-banner'))   return 'topic-banner';
     if (el.classList.contains('chapter-banner')) return 'chapter-banner';
     if (el.classList.contains('section-bar'))    return 'section-bar';
-    if (el.classList.contains('fig'))            return 'figure';
+    if (el.classList.contains('fig') || el.classList.contains('diagram-card')) return 'figure';
     if (el.classList.contains('running-head'))   return 'running-head';
     if (el.classList.contains('side-card'))      return 'side-card';
     return 'generic';
